@@ -189,8 +189,8 @@ MIT License - feel free to use for your projects
 ## Support
 
 For questions or support:
-- Email: hello@taskmetry.work
-- Website: taskmetry.work
+- Email: taskmetry@proton.me
+- Website: https://taskmetry.vercel.app/
 - Response time: Within 24 hours
 
 ---

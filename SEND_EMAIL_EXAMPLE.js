@@ -83,13 +83,13 @@ export async function POST(request) {
               </p>
 
               <p>
-                <a href="https://taskmetry.work/dashboard" class="button">View Your Booking</a>
+                <a href="https://taskmetry.vercel.app/dashboard" class="button">View Your Booking</a>
               </p>
             </div>
 
             <div class="footer">
               <p>© 2025 Taskmetry. All rights reserved.</p>
-              <p>Questions? Reply to this email or visit <a href="https://taskmetry.work" style="color: #00C8F0;">taskmetry.work</a></p>
+              <p>Questions? Reply to this email or visit <a href="https://taskmetry.vercel.app" style="color: #00C8F0;">taskmetry.vercel.app</a></p>
             </div>
           </div>
         </body>

@@ -105,7 +105,7 @@ pricing: {
 ### Update contact email
 ```javascript
 // app/page.jsx - line ~950
-{ icon: "📧", label: "Email", val: "hello@taskmetry.work" }
+{ icon: "📧", label: "Email", val: "taskmetry@proton.me" }
 ```
 
 ### Change brand color

@@ -404,7 +404,7 @@ export default function BookingPage({ params }) {
               <Link href="/">
                 <button className="btn-primary">← Return Home</button>
               </Link>
-              <button className="btn-outline" onClick={() => window.location.href = `mailto:hello@taskmetry.work?subject=Booking Confirmation`} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 32px', border: '1px solid var(--border)', borderRadius: 50, cursor: 'pointer', background: 'transparent', color: 'var(--text)', fontFamily: 'DM Sans', fontWeight: 600, fontSize: 15 }}>
+              <button className="btn-outline" onClick={() => window.location.href = `mailto:taskmetry@proton.me?subject=Booking Confirmation`} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 32px', border: '1px solid var(--border)', borderRadius: 50, cursor: 'pointer', background: 'transparent', color: 'var(--text)', fontFamily: 'DM Sans', fontWeight: 600, fontSize: 15 }}>
                 📧 Contact Support
               </button>
             </div>

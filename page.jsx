@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 
 const FONTS = `@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');`;
 
@@ -184,6 +185,7 @@ function Orb({ style }) {
 export default function Taskmetry() {
   const [nav, setNav] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [showTop, setShowTop] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", service: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
   const statsRef = useRef(null);
@@ -197,7 +199,7 @@ export default function Taskmetry() {
       el.innerHTML = s;
       document.head.appendChild(el);
     }
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => { setScrolled(window.scrollY > 40); setShowTop(window.scrollY > 300); };
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -230,10 +232,12 @@ export default function Taskmetry() {
         transition: "all .3s",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <div style={{ width: 32, height: 32, borderRadius: 8, background: "linear-gradient(135deg,var(--cyan),#7C3AED)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <span style={{ color: "#fff", fontWeight: 800, fontSize: 14, fontFamily: "Syne" }}>T</span>
-          </div>
-          <span style={{ fontFamily: "Syne", fontWeight: 700, fontSize: 18, letterSpacing: "-.01em" }}>Taskmetry</span>
+          <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none', color: 'inherit' }}>
+            <div style={{ width: 32, height: 32, borderRadius: 8, background: "linear-gradient(135deg,var(--cyan),#7C3AED)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <span style={{ color: "#fff", fontWeight: 800, fontSize: 14, fontFamily: "Syne" }}>T</span>
+            </div>
+            <span style={{ fontFamily: "Syne", fontWeight: 700, fontSize: 18, letterSpacing: "-.01em" }}>Taskmetry</span>
+          </Link>
         </div>
         <div style={{ display: "flex", gap: 32, alignItems: "center" }}>
           {["Services", "Why Us", "Work", "Contact"].map(item => (
@@ -463,9 +467,9 @@ export default function Taskmetry() {
             <button className="btn-primary" onClick={() => document.getElementById("contact").scrollIntoView({ behavior: "smooth" })}>
               Get a Free Consultation
             </button>
-            <a href="https://taskmetry.work" target="_blank" rel="noopener noreferrer"
+            <a href="https://taskmetry.vercel.app/" target="_blank" rel="noopener noreferrer"
               style={{ textDecoration: "none" }}>
-              <button className="btn-outline">Visit Taskmetry.work ↗</button>
+              <button className="btn-outline">Visit taskmetry.vercel.app ↗</button>
             </a>
           </div>
         </div>
@@ -483,8 +487,9 @@ export default function Taskmetry() {
               Tell us what you need, and we'll match you with the right remote professionals within 48 hours.
             </p>
             {[
-              { icon: "🌐", label: "Website", val: "taskmetry.work" },
-              { icon: "📧", label: "Email", val: "hello@taskmetry.work" },
+              { icon: "🌐", label: "Website", val: "https://taskmetry.vercel.app/" },
+              { icon: "📧", label: "Email", val: "taskmetry@proton.me" },
+              { icon: "📍", label: "Address", val: "Level 12, 1 Margaret Street | Sydney NSW 2000 | Australia" },
               { icon: "💬", label: "Response Time", val: "Within 24 hours" },
             ].map(c => (
               <div key={c.label} className="slide-in" style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 18 }}>
@@ -567,10 +572,18 @@ export default function Taskmetry() {
           </div>
           <div style={{ borderTop: "1px solid var(--border)", paddingTop: 24, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
             <span style={{ fontSize: 13, color: "var(--muted)" }}>© 2025 Taskmetry. All rights reserved.</span>
-            <span style={{ fontSize: 13, color: "var(--muted)" }}>Taskmetry.work · Built with ❤️ for global businesses</span>
+            <span style={{ fontSize: 13, color: "var(--muted)" }}>https://taskmetry.vercel.app · Built with ❤️ for global businesses</span>
           </div>
         </div>
       </footer>
+      <button aria-label="Back to top" title="Back to top" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        style={{
+          position: 'fixed', right: 18, bottom: 20, zIndex: 200, display: showTop ? 'flex' : 'none',
+          alignItems: 'center', justifyContent: 'center', width: 48, height: 48, borderRadius: 12,
+          background: 'linear-gradient(135deg,var(--cyan),#4F8EF7)', color: '#fff', border: 'none', cursor: 'pointer', boxShadow: '0 8px 28px rgba(0,0,0,.4)'
+        }}>
+        ↑
+      </button>
     </div>
   );
 }
