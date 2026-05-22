@@ -2,7 +2,7 @@ import './globals.css'
 
 export const metadata = {
   title: {
-    default: 'www.taskmetry.vercel.app',
+    default: 'Taskmetry',
     template: '%s | www.taskmetry.vercel.app',
   },
   description: 'Connect with expert remote professionals for data services, web development, SEO, video editing, virtual assistance, and remote staffing.',
