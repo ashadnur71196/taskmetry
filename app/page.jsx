@@ -191,6 +191,17 @@ function useInView(ref) {
   return vis;
 }
 
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= 720);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+  return isMobile;
+}
+
 function CountUp({ end, suffix, start }) {
   const [val, setVal] = useState(0);
   useEffect(() => {
@@ -220,6 +231,7 @@ function Orb({ style }) {
 
 export default function Taskmetry() {
   const [scrolled, setScrolled] = useState(false);
+  const isMobile = useIsMobile();
   const [formData, setFormData] = useState({ name: "", email: "", service: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
   const statsRef = useRef(null);
@@ -275,14 +287,14 @@ export default function Taskmetry() {
           </div>
           <span style={{ fontFamily: "Syne", fontWeight: 700, fontSize: 18, letterSpacing: "-.01em" }}>Taskmetry</span>
         </div>
-        <div style={{ display: "flex", gap: 32, alignItems: "center" }}>
+        <div style={{ display: "flex", gap: isMobile ? 0 : 32, alignItems: "center" }}>
           {["Services", "Why Us", "Work", "Contact"].map(item => (
-            <a key={item} href={`#${item.toLowerCase().replace(" ", "")}`} style={{ textDecoration: "none", color: "var(--muted)", fontSize: 14, fontWeight: 500, transition: "color .2s" }}
+            <a key={item} href={`#${item.toLowerCase().replace(" ", "")}`} style={{ display: isMobile ? "none" : "inline", textDecoration: "none", color: "var(--muted)", fontSize: 14, fontWeight: 500, transition: "color .2s" }}
               onMouseEnter={e => e.target.style.color = "var(--text)"} onMouseLeave={e => e.target.style.color = "var(--muted)"}>
               {item}
             </a>
           ))}
-          <button className="btn-primary" style={{ padding: "9px 22px", fontSize: 14 }}
+          <button className="btn-primary" style={{ padding: isMobile ? "9px 14px" : "9px 22px", fontSize: isMobile ? 13 : 14 }}
             onClick={() => document.getElementById("contact").scrollIntoView({ behavior: "smooth" })}>
             Get a Quote
           </button>
@@ -290,7 +302,7 @@ export default function Taskmetry() {
       </nav>
 
       {/* HERO */}
-      <section style={{ position: "relative", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", padding: "120px 5% 80px", overflow: "hidden" }}>
+      <section style={{ position: "relative", minHeight: isMobile ? "auto" : "100vh", display: "flex", alignItems: "center", justifyContent: "center", padding: isMobile ? "104px 5% 56px" : "120px 5% 80px", overflow: "hidden" }}>
         <div className="grid-bg" />
         <div className="noise" />
         <Orb style={{ width: 500, height: 500, top: "10%", left: "-10%", background: "rgba(0,200,240,.07)" }} />
@@ -317,7 +329,7 @@ export default function Taskmetry() {
           <div className="fade-up" style={{ animationDelay: ".1s" }}>
             <span className="tag" style={{ marginBottom: 24, display: "inline-block" }}>🌍 Trusted Globally · Remote-First</span>
           </div>
-          <h1 className="fade-up" style={{ fontSize: "clamp(42px, 7vw, 78px)", fontWeight: 800, lineHeight: 1.08, letterSpacing: "-.03em", marginBottom: 24, animationDelay: ".2s" }}>
+          <h1 className="fade-up" style={{ fontSize: isMobile ? "clamp(34px, 12vw, 48px)" : "clamp(42px, 7vw, 78px)", fontWeight: 800, lineHeight: 1.08, letterSpacing: "-.03em", marginBottom: 24, animationDelay: ".2s" }}>
             Scale Your Business<br />
             <span className="grad">Without Limits</span>
           </h1>
@@ -333,7 +345,7 @@ export default function Taskmetry() {
             </button>
           </div>
 
-          <div className="fade-up" style={{ marginTop: 64, display: "flex", gap: 32, justifyContent: "center", flexWrap: "wrap", animationDelay: ".65s" }}>
+          <div className="fade-up" style={{ marginTop: isMobile ? 36 : 64, display: "flex", gap: isMobile ? 10 : 32, justifyContent: "center", flexWrap: "wrap", animationDelay: ".65s" }}>
             {["🇺🇸 USA", "🇬🇧 UK", "🇨🇦 Canada", "🇦🇺 Australia"].map(c => (
               <span key={c} style={{ fontSize: 13, color: "var(--muted)", background: "var(--bg3)", padding: "6px 14px", borderRadius: 50, border: "1px solid var(--border)" }}>{c}</span>
             ))}
@@ -342,8 +354,8 @@ export default function Taskmetry() {
       </section>
 
       {/* SERVICES - WITH BOOKING */}
-      <section id="services" style={{ padding: "100px 5%", position: "relative" }}>
-        <div style={{ textAlign: "center", marginBottom: 64 }}>
+      <section id="services" style={{ padding: isMobile ? "64px 5%" : "100px 5%", position: "relative" }}>
+        <div style={{ textAlign: "center", marginBottom: isMobile ? 40 : 64 }}>
           <span className="tag fade-up">What We Do</span>
           <h2 className="fade-up" style={{ fontSize: "clamp(32px, 5vw, 52px)", fontWeight: 800, marginTop: 16, marginBottom: 16, letterSpacing: "-.02em" }}>
             Our <span className="grad">Core Services</span>
@@ -353,7 +365,7 @@ export default function Taskmetry() {
           </p>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 20, maxWidth: 1200, margin: "0 auto" }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit, minmax(320px, 1fr))", gap: 20, maxWidth: 1200, margin: "0 auto" }}>
           {services.map((s, i) => (
             <div key={s.label} className="card fade-up" style={{ animationDelay: `${i * .08}s`, position: "relative", overflow: "hidden", display: "flex", flexDirection: "column" }}>
               <div style={{ position: "absolute", top: 0, right: 0, width: 80, height: 80, borderRadius: "0 0 0 80px", background: `${s.color}0D` }} />
@@ -402,7 +414,7 @@ export default function Taskmetry() {
       </section>
 
       {/* STATS */}
-      <section ref={statsRef} style={{ padding: "80px 5%", background: "var(--bg2)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)", position: "relative", overflow: "hidden" }}>
+      <section ref={statsRef} style={{ padding: isMobile ? "56px 5%" : "80px 5%", background: "var(--bg2)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)", position: "relative", overflow: "hidden" }}>
         <Orb style={{ width: 300, height: 300, top: "-50%", left: "50%", background: "rgba(0,200,240,.05)" }} />
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 24, maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
           {stats.map(s => (
@@ -417,9 +429,9 @@ export default function Taskmetry() {
       </section>
 
       {/* WHY US */}
-      <section id="whyus" style={{ padding: "100px 5%" }}>
+      <section id="whyus" style={{ padding: isMobile ? "64px 5%" : "100px 5%" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? 36 : 80, alignItems: "center" }}>
             <div>
               <span className="tag slide-in">Why Taskmetry</span>
               <h2 className="slide-in" style={{ fontSize: "clamp(30px, 4vw, 48px)", fontWeight: 800, marginTop: 16, marginBottom: 20, letterSpacing: "-.02em", lineHeight: 1.15 }}>
@@ -432,7 +444,7 @@ export default function Taskmetry() {
                 Start Working With Us
               </button>
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 16 }}>
               {whys.map((w, i) => (
                 <div key={w.title} className="card fade-up" style={{ padding: 20, animationDelay: `${i * .1}s` }}>
                   <div style={{ fontSize: 26, marginBottom: 10 }}>{w.icon}</div>
@@ -446,7 +458,7 @@ export default function Taskmetry() {
       </section>
 
       {/* TARGET CLIENTS */}
-      <section style={{ padding: "80px 5%", background: "var(--bg2)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}>
+      <section style={{ padding: isMobile ? "56px 5%" : "80px 5%", background: "var(--bg2)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}>
         <div style={{ textAlign: "center", marginBottom: 48 }}>
           <span className="tag fade-up">Who We Serve</span>
           <h2 className="fade-up" style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 800, marginTop: 14, letterSpacing: "-.02em" }}>
@@ -471,14 +483,14 @@ export default function Taskmetry() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section style={{ padding: "100px 5%" }}>
+      <section style={{ padding: isMobile ? "64px 5%" : "100px 5%" }}>
         <div style={{ textAlign: "center", marginBottom: 60 }}>
           <span className="tag fade-up">Testimonials</span>
           <h2 className="fade-up" style={{ fontSize: "clamp(30px, 4vw, 48px)", fontWeight: 800, marginTop: 14, letterSpacing: "-.02em" }}>
             What Our <span className="grad">Clients Say</span>
           </h2>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 20, maxWidth: 1100, margin: "0 auto" }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit, minmax(300px, 1fr))", gap: 20, maxWidth: 1100, margin: "0 auto" }}>
           {testimonials.map((t, i) => (
             <div key={t.name} className="card fade-up" style={{ animationDelay: `${i * .1}s`, position: "relative" }}>
               <div style={{ fontSize: 40, color: "var(--cyan)", opacity: .3, fontFamily: "Syne", lineHeight: 1, marginBottom: 12 }}>"</div>
@@ -503,11 +515,11 @@ export default function Taskmetry() {
       </section>
 
       {/* CTA BANNER */}
-      <section id="work" style={{ padding: "80px 5%" }}>
+      <section id="work" style={{ padding: isMobile ? "56px 5%" : "80px 5%" }}>
         <div style={{
           maxWidth: 1100, margin: "0 auto",
           background: "linear-gradient(135deg,rgba(0,200,240,.08),rgba(124,58,237,.08))",
-          border: "1px solid rgba(0,200,240,.2)", borderRadius: 24, padding: "64px 5%",
+          border: "1px solid rgba(0,200,240,.2)", borderRadius: isMobile ? 16 : 24, padding: isMobile ? "44px 5%" : "64px 5%",
           textAlign: "center", position: "relative", overflow: "hidden",
         }}>
           <div className="grid-bg" />
@@ -532,8 +544,8 @@ export default function Taskmetry() {
       </section>
 
       {/* CONTACT */}
-      <section id="contact" style={{ padding: "100px 5%", background: "var(--bg2)", borderTop: "1px solid var(--border)" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1.3fr", gap: 80, alignItems: "start" }}>
+      <section id="contact" style={{ padding: isMobile ? "64px 5%" : "100px 5%", background: "var(--bg2)", borderTop: "1px solid var(--border)" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1.3fr", gap: isMobile ? 36 : 80, alignItems: "start" }}>
           <div>
             <span className="tag slide-in">Contact Us</span>
             <h2 className="slide-in" style={{ fontSize: "clamp(30px, 4vw, 48px)", fontWeight: 800, marginTop: 16, marginBottom: 20, letterSpacing: "-.02em", lineHeight: 1.15 }}>
@@ -558,8 +570,8 @@ export default function Taskmetry() {
           </div>
 
           {!submitted ? (
-            <form className="card fade-up" style={{ padding: 36 }} onSubmit={handleSubmit}>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
+            <form className="card fade-up" style={{ padding: isMobile ? 22 : 36 }} onSubmit={handleSubmit}>
+              <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 16, marginBottom: 16 }}>
                 <div>
                   <label style={{ fontSize: 13, color: "var(--muted)", display: "block", marginBottom: 8 }}>Full Name</label>
                   <input placeholder="John Smith" value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} required />
@@ -597,9 +609,9 @@ export default function Taskmetry() {
       </section>
 
       {/* FOOTER */}
-      <footer style={{ background: "var(--bg)", borderTop: "1px solid var(--border)", padding: "60px 5% 40px" }}>
+      <footer style={{ background: "var(--bg)", borderTop: "1px solid var(--border)", padding: isMobile ? "44px 5% 32px" : "60px 5% 40px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 48, marginBottom: 48 }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "2fr 1fr 1fr 1fr", gap: isMobile ? 28 : 48, marginBottom: isMobile ? 32 : 48 }}>
             <div>
               <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
                 <div style={{ width: 32, height: 32, borderRadius: 8, background: "linear-gradient(135deg,var(--cyan),#7C3AED)", display: "flex", alignItems: "center", justifyContent: "center" }}>

@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 const FONTS = `@import url('https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');`;
@@ -157,9 +157,21 @@ const servicesData = [
   }
 ];
 
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= 720);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+  return isMobile;
+}
+
 export default function BookingPage({ params }) {
   const { serviceId } = params;
   const service = servicesData.find(s => s.id === parseInt(serviceId));
+  const isMobile = useIsMobile();
   
   const [selectedTier, setSelectedTier] = useState('starter');
   const [bookingData, setBookingData] = useState({
@@ -227,12 +239,12 @@ export default function BookingPage({ params }) {
       </nav>
 
       {!bookingComplete ? (
-        <div style={{ paddingTop: 100, paddingBottom: 60 }}>
+        <div style={{ paddingTop: isMobile ? 68 : 100, paddingBottom: isMobile ? 36 : 60 }}>
           {/* HEADER */}
-          <section style={{ padding: '60px 5%', background: 'var(--bg2)', borderBottom: '1px solid var(--border)' }}>
+          <section style={{ padding: isMobile ? '36px 5%' : '60px 5%', background: 'var(--bg2)', borderBottom: '1px solid var(--border)' }}>
             <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 32 }}>
-                <div style={{ fontSize: 48 }}>{service.icon}</div>
+              <div style={{ display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', gap: 16, marginBottom: isMobile ? 0 : 32 }}>
+                <div style={{ fontSize: isMobile ? 38 : 48 }}>{service.icon}</div>
                 <div>
                   <h1 style={{ fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 800, marginBottom: 8, fontFamily: 'Syne' }}>{service.label}</h1>
                   <p style={{ color: 'var(--muted)', fontSize: 16 }}>{service.description}</p>
@@ -242,8 +254,8 @@ export default function BookingPage({ params }) {
           </section>
 
           {/* MAIN CONTENT */}
-          <section style={{ padding: '60px 5%' }}>
-            <div style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 60, alignItems: 'start' }}>
+          <section style={{ padding: isMobile ? '36px 5%' : '60px 5%' }}>
+            <div style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? 28 : 60, alignItems: 'start' }}>
               
               {/* LEFT - SERVICE DETAILS */}
               <div>
@@ -251,7 +263,7 @@ export default function BookingPage({ params }) {
                   <h2 style={{ fontSize: 24, fontWeight: 700, marginBottom: 16, fontFamily: 'Syne' }}>About This Service</h2>
                   <p style={{ color: 'var(--muted)', lineHeight: 1.8, marginBottom: 20 }}>{service.fullDescription}</p>
                   
-                  <div style={{ background: 'var(--bg2)', border: '1px solid var(--border)', borderRadius: 12, padding: 24, marginBottom: 24 }}>
+                  <div style={{ background: 'var(--bg2)', border: '1px solid var(--border)', borderRadius: 12, padding: isMobile ? 18 : 24, marginBottom: 24 }}>
                     <h3 style={{ fontSize: 16, fontWeight: 700, marginBottom: 16, fontFamily: 'Syne' }}>What's Included:</h3>
                     <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 12 }}>
                       {service.includedFeatures.map(feature => (
@@ -263,7 +275,7 @@ export default function BookingPage({ params }) {
                     </ul>
                   </div>
 
-                  <div style={{ background: 'var(--bg2)', border: '1px solid var(--border)', borderRadius: 12, padding: 24 }}>
+                  <div style={{ background: 'var(--bg2)', border: '1px solid var(--border)', borderRadius: 12, padding: isMobile ? 18 : 24 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
                       <span style={{ fontSize: 24 }}>⏱️</span>
                       <div>
@@ -276,13 +288,13 @@ export default function BookingPage({ params }) {
               </div>
 
               {/* RIGHT - BOOKING FORM */}
-              <div className="card" style={{ position: 'sticky', top: 100 }}>
+              <div className="card" style={{ position: isMobile ? 'relative' : 'sticky', top: isMobile ? 'auto' : 100, padding: isMobile ? 20 : 28 }}>
                 <h2 style={{ fontSize: 24, fontWeight: 700, marginBottom: 24, fontFamily: 'Syne' }}>Book Your Service</h2>
 
                 {/* PRICING TIERS */}
                 <div style={{ marginBottom: 32 }}>
                   <label style={{ fontSize: 13, color: 'var(--muted)', display: 'block', marginBottom: 12, textTransform: 'uppercase', fontWeight: 600 }}>Select a Package</label>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 16 }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: 12, marginBottom: 16 }}>
                     {['starter', 'professional'].map(tier => (
                       <button key={tier} onClick={() => { setSelectedTier(tier); setBookingData({ ...bookingData, budget: tier }); }} style={{
                         padding: 16, borderRadius: 10, border: selectedTier === tier ? `2px solid ${service.color}` : '1px solid var(--border)',
@@ -331,7 +343,7 @@ export default function BookingPage({ params }) {
                   {/* PAYMENT METHOD */}
                   <div style={{ marginBottom: 24, paddingBottom: 24, borderBottom: '1px solid var(--border)' }}>
                     <label style={{ fontSize: 13, color: 'var(--muted)', display: 'block', marginBottom: 12, textTransform: 'uppercase', fontWeight: 600 }}>Payment Method</label>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: 12 }}>
                       {['card', 'paypal', 'bank'].map(method => (
                         <button key={method} type="button" onClick={() => setPaymentMethod(method)} style={{
                           padding: 12, borderRadius: 8, border: paymentMethod === method ? `2px solid ${service.color}` : '1px solid var(--border)',
@@ -375,7 +387,7 @@ export default function BookingPage({ params }) {
       ) : (
         // CONFIRMATION PAGE
         <section style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '40px 20px' }}>
-          <div className="card" style={{ maxWidth: 500, textAlign: 'center', padding: 60 }}>
+          <div className="card" style={{ maxWidth: 500, textAlign: 'center', padding: isMobile ? 24 : 60 }}>
             <div style={{ fontSize: 80, marginBottom: 24 }}>🎉</div>
             <h1 style={{ fontSize: 32, fontWeight: 800, marginBottom: 16, fontFamily: 'Syne' }}>Booking Confirmed!</h1>
             <p style={{ fontSize: 16, color: 'var(--muted)', lineHeight: 1.8, marginBottom: 32 }}>
