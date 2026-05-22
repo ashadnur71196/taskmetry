@@ -228,9 +228,7 @@ export default function BookingPage({ params }) {
         borderBottom: '1px solid var(--border)',
       }}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <div style={{ width: 32, height: 32, borderRadius: 8, background: 'linear-gradient(135deg,var(--cyan),#7C3AED)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <span style={{ color: '#fff', fontWeight: 800, fontSize: 14, fontFamily: 'Syne' }}>T</span>
-          </div>
+          <img src="/taskmetry-logo.svg" alt="Taskmetry logo" style={{ width: 34, height: 34, borderRadius: 8, display: 'block' }} />
           <span style={{ fontFamily: 'Syne', fontWeight: 700, fontSize: 18, letterSpacing: '-.01em' }}>Taskmetry</span>
         </Link>
         <Link href="/">

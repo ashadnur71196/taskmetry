@@ -282,9 +282,7 @@ export default function Taskmetry() {
         transition: "all .3s",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <div style={{ width: 32, height: 32, borderRadius: 8, background: "linear-gradient(135deg,var(--cyan),#7C3AED)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <span style={{ color: "#fff", fontWeight: 800, fontSize: 14, fontFamily: "Syne" }}>T</span>
-          </div>
+          <img src="/taskmetry-logo.svg" alt="Taskmetry logo" style={{ width: 34, height: 34, borderRadius: 8, display: "block" }} />
           <span style={{ fontFamily: "Syne", fontWeight: 700, fontSize: 18, letterSpacing: "-.01em" }}>Taskmetry</span>
         </div>
         <div style={{ display: "flex", gap: isMobile ? 0 : 32, alignItems: "center" }}>
@@ -614,9 +612,7 @@ export default function Taskmetry() {
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "2fr 1fr 1fr 1fr", gap: isMobile ? 28 : 48, marginBottom: isMobile ? 32 : 48 }}>
             <div>
               <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
-                <div style={{ width: 32, height: 32, borderRadius: 8, background: "linear-gradient(135deg,var(--cyan),#7C3AED)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <span style={{ color: "#fff", fontWeight: 800, fontSize: 14, fontFamily: "Syne" }}>T</span>
-                </div>
+                <img src="/taskmetry-logo.svg" alt="Taskmetry logo" style={{ width: 34, height: 34, borderRadius: 8, display: "block" }} />
                 <span style={{ fontFamily: "Syne", fontWeight: 700, fontSize: 18 }}>Taskmetry</span>
               </div>
               <p style={{ color: "var(--muted)", fontSize: 14, lineHeight: 1.75, maxWidth: 260 }}>
