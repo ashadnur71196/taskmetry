@@ -556,8 +556,16 @@ export default function Taskmetry() {
               Tell us what you need, and we'll match you with the right remote professionals within 48 hours.
             </p>
             {[
-              { icon: "🌐", label: "Website", val: "https://taskmetry.vercel.app/" },
-              { icon: "📧", label: "Email", val: "taskmetry@proton.me" },
+              { icon: "🌐", label: "Website", val: (
+                  <a href="https://taskmetry.vercel.app/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--cyan)', textDecoration: 'underline' }}>
+                    www.taskmetry.vercel.app
+                  </a>
+                ) },
+                { icon: "📧", label: "Email", val: (
+                  <a href="mailto:taskmetry@proton.me" style={{ color: 'var(--cyan)', textDecoration: 'underline' }}>
+                    taskmetry@proton.me
+                  </a>
+                ) },
               { icon: "📍", label: "Address", val: "Level 12, 1 Margaret Street | Sydney NSW 2000 | Australia" },
               { icon: "💬", label: "Response Time", val: "Within 24 hours" },
             ].map(c => (
