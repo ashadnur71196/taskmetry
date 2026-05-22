@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
-const FONTS = `@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');`;
+const FONTS = `@import url('https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');`;
 
 const STYLES = `
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -14,7 +14,7 @@ const STYLES = `
   }
   html{scroll-behavior:smooth}
   body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden}
-  h1,h2,h3,h4,h5{font-family:'Syne',sans-serif}
+  h1,h2,h3,h4,h5{font-family:'Georgia',serif;font-weight:700;text-shadow:0 4px 12px rgba(0,200,240,.2);background:linear-gradient(135deg,rgba(0,200,240,.08),rgba(124,58,237,.08));-webkit-background-clip:text;padding:4px 8px;border-radius:4px}
   .grad{background:linear-gradient(135deg,var(--cyan),#7C3AED);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
   .grad-amber{background:linear-gradient(135deg,var(--amber),#F87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
   @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}

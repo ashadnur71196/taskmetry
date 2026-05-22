@@ -2,9 +2,10 @@
 import { useState } from 'react';
 import Link from 'next/link';
 
-const FONTS = `@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');`;
+const FONTS = `@import url('https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');`;
 
 const STYLES = `
+  h1,h2,h3,h4,h5{font-family:'Georgia',serif;font-weight:700;text-shadow:0 4px 12px rgba(0,200,240,.2)}
   .btn-primary {
     display: inline-flex;
     align-items: center;
