@@ -536,7 +536,7 @@ export default function Taskmetry() {
             <button className="btn-primary" onClick={() => document.getElementById("services").scrollIntoView({ behavior: "smooth" })}>
               Browse Services
             </button>
-            <a href="wwww.taskmetry.vercel.app" target="https://taskmetry.vercel.app/" rel="noopener noreferrer"
+            <a href="https://taskmetry.vercel.app/" target="_blank" rel="noopener noreferrer"
               style={{ textDecoration: "none" }}>
               <button className="btn-outline">Visit taskmetry.vercel.app ↗</button>
             </a>

@@ -2,8 +2,8 @@ import './globals.css'
 
 export const metadata = {
   title: {
-    default: 'Taskmetry | Digital Outsourcing & Remote Workforce',
-    template: '%s | Taskmetry',
+    default: 'www.taskmetry.vercel.app',
+    template: '%s | www.taskmetry.vercel.app',
   },
   description: 'Connect with expert remote professionals for data services, web development, SEO, video editing, virtual assistance, and remote staffing.',
   icons: {
