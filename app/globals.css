@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #06080F;
+  --bg2: #0C0F1A;
+  --bg3: #111525;
+  --cyan: #00C8F0;
+  --cyan2: #00E5FF;
+  --amber: #F5A623;
+  --text: #E8EAF2;
+  --muted: #7A7F9A;
+  --border: #1C2035;
+  --card: #0F1220;
+  --radius: 14px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Syne', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: 'DM Sans', sans-serif;
+  border: none;
+  cursor: pointer;
+}
+
+input, textarea, select {
+  font-family: 'DM Sans', sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
